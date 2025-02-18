@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResumeCraft</title>
+    <link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+<h1>Resume Craft</h1>
+<form id="resumeForm">
+    <label for="name">Full Name:</label>
+    <input type="text" id="name" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" required>
+
+    <label for="phone">Phone:</label>
+    <input type="tel" id="phone" required>
+
+    <label for="education">Education:</label>
+    <input type="text" id="education" required>
+
+    <label for="skills">Skills:</label>
+    <input type="text" id="skills" required>
+
+    <label for="projects">Projects:</label>
+    <input type="text" id="projects" required>
+
+    <label for="experience">Experience:</label>
+    <input type="text" id="experience" required>
+
+    <button type="submit">Generate Resume</button>
+</form>
+
+<div id="generatedResume"></div>
+
+<script src="src/script.js"></script>
+</body>
+</html>
