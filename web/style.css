@@ -1,36 +1,85 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #f5f5f5;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
 }
 
-h1 {
-    color: #007BFF;
-}
-
-form {
+.container {
+    max-width: 600px;
     background: white;
     padding: 20px;
     border-radius: 8px;
-    width: 50%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     margin: auto;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h1 {
+    color: #2C3E50;
+}
+
+fieldset {
+    border: none;
+    background: #ECF0F1;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+legend {
+    font-weight: bold;
+    color: #2980B9;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
 }
 
 input {
-    width: 80%;
-    padding: 8px;
-    margin: 10px 0;
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #BDC3C7;
+    border-radius: 5px;
 }
 
 button {
-    background-color: #007BFF;
+    background-color: #3498DB;
     color: white;
+    padding: 10px 20px;
     border: none;
-    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 16px;
     cursor: pointer;
+    margin-top: 10px;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #2980B9;
+}
+
+/* Resume Preview */
+#resumePreview {
+    text-align: left;
+    margin-top: 20px;
+    padding: 20px;
+    background: #FAFAFA;
+    border-left: 5px solid #3498DB;
+}
+
+#resumePreview h2 {
+    color: #3498DB;
+    border-bottom: 2px solid #3498DB;
+    padding-bottom: 5px;
+}
+
+#resumePreview p {
+    margin: 5px 0;
+    font-size: 16px;
 }

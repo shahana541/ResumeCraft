@@ -3,35 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ResumeCraft - Resume Generator</title>
+    <title>ResumeCraft - Build Your Resume</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h1>ResumeCraft</h1>
-<form id="resumeForm">
-    <label>Name:</label>
-    <input type="text" name="name" required>
+<div class="container">
+    <h1>ResumeCraft</h1>
+    <form id="resumeForm">
+        <fieldset>
+            <legend>Personal Details</legend>
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
 
-    <label>Email:</label>
-    <input type="email" name="email" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
 
-    <label>Phone:</label>
-    <input type="text" name="phone" required>
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+        </fieldset>
 
-    <label>Education:</label>
-    <input type="text" name="education" required>
+        <fieldset>
+            <legend>Education & Experience</legend>
+            <label for="education">Education:</label>
+            <input type="text" id="education" name="education" placeholder="E.g., BE in Computer Science" required>
 
-    <label>Experience:</label>
-    <input type="text" name="experience" required>
+            <label for="experience">Work Experience:</label>
+            <input type="text" id="experience" name="experience" placeholder="E.g., Fresher or Software Engineer">
+        </fieldset>
 
-    <label>Skills:</label>
-    <input type="text" name="skills" required>
+        <fieldset>
+            <legend>Skills</legend>
+            <label for="skills">Skills:</label>
+            <input type="text" id="skills" name="skills" placeholder="E.g., Java, HTML, CSS">
+        </fieldset>
 
-    <label>Projects:</label>
-    <input type="text" name="projects" required>
+        <button type="submit">Generate Resume</button>
+    </form>
 
-    <button type="submit">Generate Resume</button>
-</form>
+    <div id="resumePreview"></div>
+</div>
 
 <script src="script.js"></script>
 </body>

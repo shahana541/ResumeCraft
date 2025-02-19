@@ -9,7 +9,8 @@ import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
 import java.util.stream.Collectors;
 
-public class ResumeServer {
+public class
+ResumeServer {
     public static void main(String[] args) throws IOException {
         HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
         server.createContext("/submit", new ResumeHandler());
