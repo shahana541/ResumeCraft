@@ -1,25 +1,25 @@
-/* Import Google Font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f4f4f4;
+    background-color: #f7f9fc;
     margin: 0;
     padding: 20px;
+    text-align: center;
 }
 
 .container {
     max-width: 600px;
     background: white;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
     margin: auto;
-    text-align: center;
 }
 
 h1 {
     color: #2C3E50;
+    font-size: 28px;
 }
 
 fieldset {
@@ -33,6 +33,7 @@ fieldset {
 legend {
     font-weight: bold;
     color: #2980B9;
+    font-size: 18px;
 }
 
 label {
@@ -43,43 +44,48 @@ label {
 
 input {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     margin-top: 5px;
     border: 1px solid #BDC3C7;
     border-radius: 5px;
+    font-size: 16px;
 }
 
 button {
     background-color: #3498DB;
     color: white;
-    padding: 10px 20px;
+    padding: 12px;
     border: none;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 18px;
     cursor: pointer;
     margin-top: 10px;
+    width: 100%;
+    transition: 0.3s;
 }
 
 button:hover {
     background-color: #2980B9;
 }
 
-/* Resume Preview */
 #resumePreview {
     text-align: left;
     margin-top: 20px;
     padding: 20px;
-    background: #FAFAFA;
+    background: #FFFFFF;
+    border-radius: 8px;
     border-left: 5px solid #3498DB;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-#resumePreview h2 {
+#resumePreview h1 {
     color: #3498DB;
     border-bottom: 2px solid #3498DB;
     padding-bottom: 5px;
+    font-size: 24px;
 }
 
 #resumePreview p {
-    margin: 5px 0;
+    margin: 8px 0;
     font-size: 16px;
 }

@@ -1,30 +1,22 @@
-document.getElementById("resumeForm").addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevent page reload
+document.getElementById("resumeForm").addEventListener("submit", async function(event) {
+    event.preventDefault(); // Prevent default form submission
 
-    const formData = new FormData(this);
+    const formData = new FormData(this); // Get form data
 
-    fetch("http://localhost:8080/submit", {
-        method: "POST",
-        body: new URLSearchParams(formData), // Convert to x-www-form-urlencoded format
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-        },
-    })
-    .then(response => response.text()) // Get text response from server
-    .then(data => {
-        console.log("Server Response:", data);
+    try {
+        const response = await fetch("http://localhost:8080/submit", {
+            method: "POST",
+            body: new URLSearchParams(formData) // Convert form data to URL encoded format
+        });
 
-        // Generate Resume Preview
-        const previewSection = document.getElementById("resumePreview");
-        previewSection.innerHTML = `
-            <h2>Resume Preview</h2>
-            <p><strong>Name:</strong> ${formData.get("name")}</p>
-            <p><strong>Email:</strong> ${formData.get("email")}</p>
-            <p><strong>Phone:</strong> ${formData.get("phone")}</p>
-            <p><strong>Education:</strong> ${formData.get("education")}</p>
-            <p><strong>Experience:</strong> ${formData.get("experience")}</p>
-            <p><strong>Skills:</strong> ${formData.get("skills")}</p>
-        `;
-    })
-    .catch(error => console.error("Error:", error));
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const resumeHtml = await response.text(); // Get response HTML
+        document.getElementById("resumePreview").innerHTML = resumeHtml; // Display resume
+    } catch (error) {
+        console.error("Error submitting form:", error);
+        alert("Failed to generate resume. Please check the server.");
+    }
 });
