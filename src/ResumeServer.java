@@ -1,12 +1,13 @@
 import com.sun.net.httpserver.HttpServer;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpExchange;
+
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.InputStream;
 import java.net.InetSocketAddress;
-import java.net.URLDecoder;
-import java.util.HashMap;
-import java.util.Map;
+import java.nio.charset.StandardCharsets;
+import java.util.stream.Collectors;
 
 public class ResumeServer {
     public static void main(String[] args) throws IOException {
@@ -21,36 +22,24 @@ public class ResumeServer {
         @Override
         public void handle(HttpExchange exchange) throws IOException {
             if ("POST".equals(exchange.getRequestMethod())) {
-                String requestBody = new String(exchange.getRequestBody().readAllBytes());
-                Map<String, String> formData = parseFormData(requestBody);
+                // Read the request body (form data)
+                InputStream inputStream = exchange.getRequestBody();
+                String requestBody = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
+                System.out.println("Received Data: " + requestBody);
 
-                String resumeHTML = "<html><head><title>Generated Resume</title></head><body>";
-                resumeHTML += "<h1 style='color:blue;'>" + formData.get("name") + "</h1>";
-                resumeHTML += "<p><strong>Email:</strong> " + formData.get("email") + "</p>";
-                resumeHTML += "<p><strong>Phone:</strong> " + formData.get("phone") + "</p>";
-                resumeHTML += "<h2>Education</h2><p>" + formData.get("education") + "</p>";
-                resumeHTML += "<h2>Experience</h2><p>" + formData.get("experience") + "</p>";
-                resumeHTML += "<h2>Skills</h2><p>" + formData.get("skills") + "</p>";
-                resumeHTML += "<h2>Projects</h2><p>" + formData.get("projects") + "</p>";
-                resumeHTML += "<button onclick='window.close()'>Close</button>";
-                resumeHTML += "</body></html>";
-
-                exchange.sendResponseHeaders(200, resumeHTML.length());
+                // Send a response back to the client
+                String response = "Resume submitted successfully!";
+                exchange.sendResponseHeaders(200, response.length());
                 OutputStream os = exchange.getResponseBody();
-                os.write(resumeHTML.getBytes());
+                os.write(response.getBytes());
+                os.close();
+            } else {
+                String response = "Invalid Request!";
+                exchange.sendResponseHeaders(405, response.length());
+                OutputStream os = exchange.getResponseBody();
+                os.write(response.getBytes());
                 os.close();
             }
-        }
-
-        private Map<String, String> parseFormData(String formData) throws IOException {
-            Map<String, String> map = new HashMap<>();
-            for (String pair : formData.split("&")) {
-                String[] keyValue = pair.split("=");
-                if (keyValue.length == 2) {
-                    map.put(URLDecoder.decode(keyValue[0], "UTF-8"), URLDecoder.decode(keyValue[1], "UTF-8"));
-                }
-            }
-            return map;
         }
     }
 }
