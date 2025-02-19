@@ -1,128 +1,36 @@
-/* set some default styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Body styling */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f9;
-    color: #333;
-    padding: 20px;
-}
-
-/* Header styling */
-h1 {
+    font-family: Arial, sans-serif;
     text-align: center;
-    margin-bottom: 30px;
-    color: #4CAF50;
-    font-size: 32px;
-    font-weight: bold;
+    background-color: #f5f5f5;
 }
 
-/* Form container */
+h1 {
+    color: #007BFF;
+}
+
 form {
-    max-width: 500px;
-    margin: 0 auto;
+    background: white;
     padding: 20px;
-    background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 50%;
+    margin: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Input field styling */
-label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-    color: #333;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="tel"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: #f9f9f9;
+input {
+    width: 80%;
+    padding: 8px;
+    margin: 10px 0;
 }
 
 button {
-    display: block;
-    width: 100%;
-    padding: 12px;
-    background-color: #4CAF50;
+    background-color: #007BFF;
     color: white;
     border: none;
-    border-radius: 4px;
-    font-size: 18px;
+    padding: 10px 15px;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #45a049;
-}
-
-/* Resume preview container */
-#generatedResume {
-    margin-top: 30px;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Styling for resume preview text */
-#generatedResume h2 {
-    text-align: center;
-    color: #4CAF50;
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-/* Section styling */
-#generatedResume .section {
-    margin-bottom: 15px;
-}
-
-/* Name section styling */
-#generatedResume .name {
-    font-size: 28px;
-    font-weight: bold;
-    color: #2c3e50;
-}
-
-/* Contact information */
-#generatedResume .contact-info {
-    font-size: 18px;
-    font-weight: normal;
-}
-
-/* Section title like Skills, Projects */
-#generatedResume .section strong {
-    font-size: 18px;
-    color: #2c3e50;
-}
-
-/* Skills and Projects lists */
-#generatedResume .skills ul, #generatedResume .projects ul {
-    list-style-type: square;
-    margin-left: 20px;
-}
-
-/* Experience section styling */
-#generatedResume .experience p {
-    font-size: 16px;
-    line-height: 1.6;
-}
-
-/* General text for resume */
-#generatedResume p {
-    font-size: 16px;
-    line-height: 1.6;
+    background-color: #0056b3;
 }

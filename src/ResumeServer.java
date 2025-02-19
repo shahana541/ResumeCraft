@@ -4,63 +4,53 @@ import com.sun.net.httpserver.HttpExchange;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
-import java.nio.charset.StandardCharsets;
-import java.util.Scanner;
+import java.net.URLDecoder;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ResumeServer {
     public static void main(String[] args) throws IOException {
-        // Create HTTP Server on Port 8000
-        HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
-
-        // Define route for handling form submission
-        server.createContext("/generateResume", new ResumeHandler());
-
-        // Start the server
+        HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
+        server.createContext("/submit", new ResumeHandler());
         server.setExecutor(null);
         server.start();
-        System.out.println("Server started on http://localhost:8000");
+        System.out.println("Server started on port 8080...");
     }
 
-    // Handle resume generation request
     static class ResumeHandler implements HttpHandler {
         @Override
         public void handle(HttpExchange exchange) throws IOException {
             if ("POST".equals(exchange.getRequestMethod())) {
-                // Read request body
-                Scanner scanner = new Scanner(exchange.getRequestBody(), StandardCharsets.UTF_8.name());
-                StringBuilder requestData = new StringBuilder();
-                while (scanner.hasNextLine()) {
-                    requestData.append(scanner.nextLine());
-                }
-                scanner.close();
+                String requestBody = new String(exchange.getRequestBody().readAllBytes());
+                Map<String, String> formData = parseFormData(requestBody);
 
-                // Process form data
-                String response = generateResume(requestData.toString());
+                String resumeHTML = "<html><head><title>Generated Resume</title></head><body>";
+                resumeHTML += "<h1 style='color:blue;'>" + formData.get("name") + "</h1>";
+                resumeHTML += "<p><strong>Email:</strong> " + formData.get("email") + "</p>";
+                resumeHTML += "<p><strong>Phone:</strong> " + formData.get("phone") + "</p>";
+                resumeHTML += "<h2>Education</h2><p>" + formData.get("education") + "</p>";
+                resumeHTML += "<h2>Experience</h2><p>" + formData.get("experience") + "</p>";
+                resumeHTML += "<h2>Skills</h2><p>" + formData.get("skills") + "</p>";
+                resumeHTML += "<h2>Projects</h2><p>" + formData.get("projects") + "</p>";
+                resumeHTML += "<button onclick='window.close()'>Close</button>";
+                resumeHTML += "</body></html>";
 
-                // Send response back to frontend
-                exchange.sendResponseHeaders(200, response.getBytes().length);
+                exchange.sendResponseHeaders(200, resumeHTML.length());
                 OutputStream os = exchange.getResponseBody();
-                os.write(response.getBytes());
+                os.write(resumeHTML.getBytes());
                 os.close();
             }
         }
-    }
 
-    // Function to format resume as HTML
-    private static String generateResume(String requestData) {
-        String[] fields = requestData.split("&");
-        StringBuilder resume = new StringBuilder("<html><head><title>Resume Preview</title></head><body>");
-
-        for (String field : fields) {
-            String[] keyValue = field.split("=");
-            if (keyValue.length == 2) {
-                String key = keyValue[0].replace("+", " ");
-                String value = keyValue[1].replace("+", " ");
-                resume.append("<h3>").append(key).append("</h3><p>").append(value).append("</p>");
+        private Map<String, String> parseFormData(String formData) throws IOException {
+            Map<String, String> map = new HashMap<>();
+            for (String pair : formData.split("&")) {
+                String[] keyValue = pair.split("=");
+                if (keyValue.length == 2) {
+                    map.put(URLDecoder.decode(keyValue[0], "UTF-8"), URLDecoder.decode(keyValue[1], "UTF-8"));
+                }
             }
+            return map;
         }
-
-        resume.append("</body></html>");
-        return resume.toString();
     }
 }
